@@ -1,0 +1,16 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+hostDir = https://expousipa.influenzer.com.br
+
+instaUser = souinfluenzer
+instaPass = contato@2
+
+listOfTags = elenao, lordpub, souInfluenzer
+listOfLocations = 153301188634206/a2portais-web-e-servicos-digitais/,1358198/lord-pub/,234951980/seed-mg/
+
+autoLoad = 0
+
+pegaClicaveisStories = 1
+#1 significa verdadeiro, 0 falso

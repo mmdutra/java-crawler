@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN_COMPLETE">%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n</Property>
+        <Property name="LOG_PATTERN">%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] (%F:%L) - %m%n</Property>
+        <Property name="LOG_DIR">src/main/resources/logs/</Property>
+    </Properties>
+ 
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+         
+        <File name="debugLogHtml" fileName="${LOG_DIR}debug-Influenzer.html" >       
+            <LevelRangeFilter minLevel="INFO" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <HTMLLayout charset="UTF-8" title="Debug Logs" locationInfo="true" />
+        </File>  
+        <RollingFile name="debugLog" fileName="${LOG_DIR}debug-Influenzer.log"
+            filePattern="${LOG_DIR}app-debug-%d{yyyy-MM-dd}-%i.log">
+            
+            <LevelRangeFilter minLevel="DEBUG" maxLevel="FATAL" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="4500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+
+        <File name="botInfoLogHtml" fileName="${LOG_DIR}info-Influenzer.html" >       
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <HTMLLayout charset="UTF-8" title="Info Logs" locationInfo="true" />
+        </File>          
+        <RollingFile name="botInfoLog" fileName="${LOG_DIR}info-Influenzer.log"
+            filePattern="${LOG_DIR}app-botinfo-%d{yyyy-MM-dd}-%i.log" >
+            
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+        <File name="infoLogHtml" fileName="${LOG_DIR}info-geral.html" >       
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <HTMLLayout charset="UTF-8" title="Info Logs" locationInfo="true" />
+        </File>          
+        <RollingFile name="infoLog" fileName="${LOG_DIR}info-geral.log"
+            filePattern="${LOG_DIR}app-info-%d{yyyy-MM-dd}-%i.log" >
+            
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+        
+        
+        <File name="errorLogHtml" fileName="${LOG_DIR}error-app.html" >       
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <HTMLLayout charset="UTF-8" title="Error Logs" locationInfo="true" />
+        </File>                     
+        <RollingFile name="errorLog" fileName="${LOG_DIR}error-app.log"
+            filePattern="${LOG_DIR}apperror-%d{yyyy-MM-dd}-%i.log" >
+            <LevelRangeFilter minLevel="WARN" maxLevel="FATAL" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+         
+    </Appenders>
+ 
+    <Loggers>
+     
+        <Logger name="influenzer.bot" additivity="false">
+            <AppenderRef ref="botInfoLog" />
+            <AppenderRef ref="botInfoLogHtml" />
+            <AppenderRef ref="debugLog" />
+            <AppenderRef ref="debugLogHtml" />
+        </Logger>
+         
+        <!--Logger name="influenzer.bot" level="debug" additivity="false">
+            <AppenderRef ref="infoLog"  />
+            <AppenderRef ref="errorLog" />
+            <AppenderRef ref="infoLogHtml"  />
+        </Logger-->
+         
+        <!--Logger name="org.springframework" additivity="false">
+            <AppenderRef ref="springLog" />
+            <AppenderRef ref="Console"/>
+        </Logger-->
+                 
+        <Root level="debug">
+            <!--AppenderRef ref="debugLog" />
+            <AppenderRef ref="debugLogHtml" />
+
+            <AppenderRef ref="infoLog"  />
+            <AppenderRef ref="infoLogHtml"  /-->
+            
+            <AppenderRef ref="errorLog" />
+            <AppenderRef ref="errorLogHtml">
+            <AppenderRef ref="Console"  />
+        </Root>
+ 
+    </Loggers>
+ 
+</Configuration>
